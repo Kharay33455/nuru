@@ -1,0 +1,25 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<div class="full-img" id="fullImgBox">
+    <span onclick="hideImg()">
+        X
+    </span>
+    <img src="{{first.picture.url}}" id="fullImg" alt="">
+    <p id="caption">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, odit! Eveniet et, dolores non beatae deleniti
+        fugiat quibusdam vitae debitis aperiam fugit quasi sint odit dolore ullam ipsum atque natus.
+    </p>
+</div>
+<div class="img-gallery">
+
+    <!--Loop through all photos-->
+    {% for p in photos %}
+
+    <img src="{{p.picture.url}}" onclick="showImg(this.src, this.alt)" alt="{{p.description}}">
+
+    {% endfor %}
+    <!--End loop-->
+
+</div>
+{% endblock %}

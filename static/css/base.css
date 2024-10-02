@@ -1,0 +1,321 @@
+.donate {
+    background-color: #FF9822;
+    color: white;
+}
+
+.row {
+    padding: 50px;
+    background-color: #019147;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-radius: 1%;
+    color: white;
+}
+
+.join {
+    background-color: #FF9822;
+    color: white;
+    padding: 2%;
+    border-radius: 3%;
+    text-decoration: none;
+    box-shadow: aqua;
+}
+
+body {
+    background: #ecf4fb;
+    font-family: sans-serif, Arial, Helvetica;
+}
+
+.read {
+    background-color: #FF9822;
+    color: white;
+    padding: 10px;
+    border-radius: 3%;
+    text-decoration: none;
+    box-shadow: aqua;
+}
+
+.prow {
+    display: flex;
+    clear: both;
+    content: "";
+    float: left;
+}
+
+.ptable {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.ptime {
+    padding: 100px;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+th,
+td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.erow {
+    display: flex;
+    content: "";
+    clear: both;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+
+.ecol {
+    width: 33.333%;
+    float: left;
+    margin: 2%;
+    padding: 2%;
+
+
+}
+
+.emain {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.join-us {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.prow {
+    display: flex;
+    content: "";
+    clear: both;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+
+.pcol {
+    width: 20%;
+    float: left;
+    margin: 2%;
+    height: 100%;
+    aspect-ratio: 1/1;
+
+
+}
+
+
+.prow2 {
+    display: flex;
+    content: "";
+    clear: both;
+    margin-left: 15%;
+    margin-right: 15%;
+
+}
+
+.pcol2 {
+    width: 25%;
+    float: left;
+    margin: 2%;
+    height: 100%;
+    aspect-ratio: 1/1;
+
+
+}
+
+.my_footer {
+    display: flex;
+    content: "";
+    clear: both;
+    padding: 20%;
+    background-color: skyblue;
+}
+
+.my_footer_col {
+    width: 33.333;
+    float: left;
+    margin: 5%;
+}
+
+.black {
+    color: black;
+}
+
+.admin {
+    background-color: #87CEEB;
+    margin-left: 0%;
+    margin-right: 0% !important;
+    border-radius: 0%;
+}
+
+.num {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    font-size: xx-large;
+}
+
+.img-gallery {
+    width: 80%;
+    margin: 100px auto 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
+}
+
+.img-gallery img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.img-gallery img:hover {
+    transform: scale(0.8) rotate(-15deg);
+    border-radius: 25%;
+}
+.pcol img:hover{
+    transform: scale(0.8) rotate(-15deg);
+    border-radius: 25%;   
+}
+.pcol2 img:hover{
+    transform: scale(0.8) rotate(-15deg);
+    border-radius: 25%;   
+}
+.full-img {
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.full-img img {
+    width: 90%;
+    max-width: 500px;
+}
+
+.full-img span {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+}
+
+#caption {
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    bottom: 0;
+    padding: 20px;
+}
+
+.intro {
+    text-align: center;
+    padding: 40px;
+    color: white;
+    background-color: #87CEEB;
+}
+
+#map-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.events{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    padding: 50px;
+
+}
+.events-col{
+    background-color: #87CEEB;
+    padding: 50px;
+
+}
+
+
+
+@media screen and (max-width: 991px) {
+
+    /*FOR iPads and tablets */
+    .row {
+        display: block;
+    }
+
+    .col {
+        padding-top: 50px;
+    }
+
+    .ecol {
+        width: 100%;
+        float: left;
+        margin: 1%;
+        padding: 1%;
+
+
+    }
+
+    .erow {
+        display: block;
+    }
+
+    .pcol {
+        width: 30%;
+        float: left;
+        margin: 1%;
+        padding: 1%;
+
+
+    }
+
+    .prow {
+        display: block;
+        margin: 0;
+    }
+
+    .prow2 {
+        margin: 0;
+    }
+
+    .pcol2 {
+        width: 50%;
+        float: left;
+        margin: 1%;
+        padding: 1%;
+
+
+    }
+
+    .num {
+        font-size: large;
+
+    }
+    .events{
+        display: block;
+    }
+    .events-col{
+        margin: 20px;
+    }
+}

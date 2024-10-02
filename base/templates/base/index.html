@@ -1,0 +1,287 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+
+
+
+    <!--Green in the name div-->
+    <div class="row">
+
+
+        <!--Two cols-->
+
+
+        <div class="col">
+            <h1>
+                Welcome to Allahu Nuru Ala Nuru Islamic Prayer Forum.
+            </h1> <br>
+            <hr>
+            <p>
+                Experience the strength of faith and community at the Allahu Nuru Ala Nuru Islamic Prayer Forum. Our
+                mission is to cultivate an enlightened
+                Muslim society grounded in a genuine understanding of Islam, fostering spiritual growth and promoting
+                the welfare of all humanity. <br>
+
+
+                Allahu Nuru Ala Nuru Islamic Prayer Forum was established on the first Thursday of February 2013 at
+                Shonle along Imowonla Road, starting with just seven members.
+            </p>
+
+            <a href="{% url 'nuru:about' %}" class="join">Read about us.</a>
+
+        </div>
+
+
+        <div class="col">
+            <img style="width: 100%;" src="{% static 'images/praying.jpg' %}" alt="">
+
+
+        </div>
+
+
+
+
+    </div>
+    <!--Green in the name div-->
+
+
+
+    <!--Prayer times section-->
+
+    <div class="ptime">
+        <div class="ptimehead">
+            <h2>
+                Prayer Timetable
+
+            </h2>
+        </div>
+    </div>
+
+
+    <div class="ptable">
+
+
+
+
+        <div class="prow">
+
+
+            <div class="col">
+
+                <h3>
+                    Worship with us in the name of Allah, creator of the universe.
+                </h3>
+
+                <b>
+                    In Islam, prayer (Salah) is a core act of worship, observed five times daily at designated times.
+                    These prayer times are determined by the position of the sun and vary according to geographic
+                    location and season.
+                </b> <br>
+                <hr>
+                <p>
+
+
+                        <a href="" class="join">
+                            Read more
+                        </a>
+
+
+
+                </p>
+
+
+            </div>
+
+
+            <div class="col">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>
+                                Salat
+                            </th>
+                            <th>
+                                Azan
+                            </th>
+                            <th>
+                                Prayer
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+
+                        {% for pt in prayer_time %}
+                        <tr>
+                            <td>
+
+                                {{pt.icon|safe}}
+
+
+                                {{pt.name}}
+                            </td>
+                            <td>
+                                {{pt.azan}} </td>
+                            <td>
+                                {{pt.azan}} </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <!--Prayer times section-->
+
+    <!--Events and upcoming community activities-->
+    <h3 style="text-align: center; text-decoration: underline;">
+        Upcoming events and community activities.
+    </h3>
+    <p class="join-us">
+
+        Join Us for Upcoming Events at the Mosque! <br>
+
+        We invite you to explore our website for a list of exciting upcoming events and community activities.
+        Whether you're looking to deepen your understanding of our faith, connect with fellow community members, or
+        participate in family-friendly activities, there's something for everyone! <br>
+
+        Don't miss out on our special gatherings, educational programs, and volunteer opportunities. Visit our <a href="{% url 'nuru:events' %}">events</a> 
+        page today and be part of our vibrant community! <br>
+
+        We look forward to welcoming you!
+
+
+    </p> <br>
+<a href="{% url 'nuru:event' main.slugger %}" style="text-decoration: none; color: black;">
+    <h4 style="text-align: center;">
+        {{main.name}}
+    </h4> <br /> 
+    <p style="text-align: center;">
+        Venue: {{main.venue}}
+    </p>
+    <br>
+    <div class="emain">
+
+        <img style="width: 100%s;" src="{{main.picture.url}}" alt="{{main.info}}">
+
+    </div>
+</a>
+
+    <div class="erow">
+
+
+
+
+
+
+        {% for e in events %}
+        <div class="ecol"
+            style="background-image: url({{e.picture.url}}); padding: 10%; background-repeat: no-repeat; background-size: contain;">
+
+            <a href="{% url 'nuru:event' e.slugger %}" style="text-decoration: none; color: black;">
+
+
+            <b> {{e.name}}</b> <br>
+            Venue: {{e.venue}}
+        </a>
+    </a>
+
+
+        </div>
+        {% endfor %}
+        <a href="{% url 'nuru:events' %}">More events.</a>
+
+
+    </div>
+
+    <!--End of events and upcoming activities-->
+
+    <!--Photo gallery division-->
+    <h3 style="text-align: center; margin-top: 20px;">
+        Photo gallery
+    </h3>
+
+    <div>
+
+
+
+        <div class="prow">
+
+            {% for p in photos|slice:"0:5" %}
+
+
+            <div class="pcol">
+                <img style="width: 100%; height: 100%; cursor: pointer;" onclick="showImg(this.src, this.alt)" src="{{p.picture.url}}" alt="{{p.description}}">
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+
+        <div class="prow2">
+
+            {% for p in photos|slice:"6:9" %}
+
+
+            <div class="pcol2">
+                <img style="width: 100%; height: 100%; cursor: pointer;" src="{{p.picture.url}}" onclick="showImg(this.src, this.alt)" src="{{p.picture.url}}" alt="{{p.description}}">
+            </div>
+
+            {% endfor %}
+
+
+
+            <div class="pcol2" style="position: relative;">
+                <a href="{% url 'nuru:gallery' %}">
+
+                    <img style="width: 100%; height: 100%;" src="{% static 'images/more.png' %}" alt="">
+                    <p class="num">
+                        {{num}}
+                    </p>
+                </a>
+
+            </div>
+
+            <div class="full-img" id="fullImgBox">
+                <span onclick="hideImg()">
+                    X
+                </span>
+                <img src="{{first.picture.url}}" id="fullImg" alt="">
+                <p id="caption">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, odit! Eveniet et, dolores non beatae deleniti
+                    fugiat quibusdam vitae debitis aperiam fugit quasi sint odit dolore ullam ipsum atque natus.
+                </p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <!--End of photo gallery div-->
+
+
+</div>
+<script src="{% static 'scripts/base.js' %}"></script>
+{% endblock %}

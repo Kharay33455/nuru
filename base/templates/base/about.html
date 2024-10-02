@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .row {
+        background-color: #ecf4fb;
+        color: black;
+    }
+</style>
+<main>
+
+    <div style="position: relative;">
+        <img src="{% static 'images/mosque.webp' %}" style="height:60vh; width: 100%;" alt="">
+        <div
+            style="width: 100%; display: flex; align-items: center; justify-content: center; position: absolute;top: 0; color: white; background-color: rgba(0,0,0,0.5); height: 100%;">
+            <h1 style="font-size:70px;">
+                <b>
+                    About Us
+                </b>
+            </h1>
+        </div>
+    </div>
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+        <h2>
+            Meet our leaders.
+        </h2>
+        <div class="row">
+            {% for l in leaders %}
+            <div class="col-lg-4">
+                <img class="bd-placeholder-img rounded-circle" width="140" height="140"
+                    src="{{l.picture.url}}" role="img" aria-label="Placeholder"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+            </img>
+                <h2 class="fw-normal">
+                    {{l.position}} {{l.name}}
+                </h2>
+                <p>
+                {{l.bio}}
+                </p>
+            </div><!-- /.col-lg-4 -->
+            {% endfor %}
+          
+        
+        </div>
+
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1">Intoduction. <span class="text-body-secondary">Welcome to
+                        Welcome to the {{name}} prayer forum.</span></h2>
+                <p class="lead">Located in the heart of Shonle, {{name}} is a vibrant community center
+                    dedicated to serving the spiritual and social needs of our members and the surrounding area.
+                    Established in 2013, we strive to create an inclusive environment where individuals and families
+                    can come together to worship, learn, and support one another.</p>
+            </div>
+            <div class="col-md-5">
+                <img src="{% static 'images/praying.jpg' %}" alt="" width="500" height="500" role="img">
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading fw-normal lh-1">Mission Statement <span class="text-body-secondary">Our
+                        Mission
+                    </span></h2>
+                <p class="lead">At {{name}}, our mission is to promote the values of Islam, fostering spiritual
+                    growth, community engagement, and a deep understanding of our faith. We aim to provide a welcoming
+                    space for worship and education, encouraging everyone to embrace the teachings of the Quran and the
+                    Prophet Muhammad (peace be upon him). Our vision is to create a harmonious community that embodies
+                    compassion, respect, and service to humanity.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <img class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                    height="500" src="{% static 'images/moon.jpg' %}" role="img" aria-label="Placeholder: 500x500"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
+                </img>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading fw-normal lh-1">History <span class="text-body-secondary">Our Journey
+                    </span></h2>
+                <p class="lead">
+                    Founded in 2013 by a group of dedicated
+                    individuals, {{name}} began as a small prayer space. Over the years, with the support of our
+                    growing community, we have expanded our facilities and services. Today, we offer various programs,
+                    including educational classes, community outreach initiatives, and social events that cater to
+                    people of all ages."
+                </p>
+            </div>
+            <div class="col-md-5">
+                <img style="aspect-ratio: 1/1;"
+                    class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                    height="500" src="{% static 'images/cert.jpg' %}" role="img" aria-label="Placeholder: 500x500"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"></rect>
+                </img>
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <!-- /END THE FEATURETTES -->
+
+    </div><!-- /.container -->
+
+
+    <!-- FOOTER -->
+    <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+    </footer>
+</main>
+
+<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+{% endblock %}

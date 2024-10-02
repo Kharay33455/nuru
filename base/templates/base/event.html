@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="display-4 fw-bold text-body-emphasis">{{event.name}}</h1>
+<h2>
+    Venue: {{event.venue}}
+</h2>
+<div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+{{event.info}}
+
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+        <button type="button" class="btn btn-outline-primary btn-lg px-4 me-sm-3">Starts: {{event.start}} </button>
+        <button type="button" class="btn btn-outline-danger btn-lg px-4">Ends: {{event.end}} </button>
+    </div>
+</div>
+    <div class="container px-5">
+        {% if event.picture %}
+        <img src="{{event.picture.url}}" class="img-fluid border rounded-3 shadow-lg mb-4" alt="Example image" width="700"
+            height="500" loading="lazy">
+            {% endif %}
+    </div>
+</div>
+
+
+<a class="btn btn-block btn-outline-primary" style="width: 100%;" href="{% url 'nuru:events' %}">
+    More events?
+</a>
+{% endblock %}
