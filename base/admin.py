@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import *
+from django.contrib.auth.models import User, Group
 
 
 class EmailAdmin(admin.ModelAdmin):
@@ -33,5 +34,6 @@ admin.site.register(Leader)
 admin.site.register(Download)
 admin.site.register(Email, EmailAdmin)
 admin.site.register(BankAccount)
-
+admin.site.unregister(User)
+admin.site.unregister(Group)
 # Register your models here.
