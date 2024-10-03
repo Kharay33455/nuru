@@ -12,4 +12,9 @@ urlpatterns = [
     path('events/<slug:event>', views.event, name='event'),
     path('about-us', views.about, name='about'),
     path('downloads', views.downloads, name='downloads'),
+    path('download/<int:document_id>/', views.download_file, name='download-file'),
+    path('suscribe/', views.suscribe, name='suscribe'),
+    path('prayers', views.prayers, name='prayers'),
+    path('donate', views.donate, name='donate'),
+
 ]

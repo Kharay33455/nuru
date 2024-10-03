@@ -4,4 +4,23 @@
 <div>
     <h1 class="intro"> Documents downloads...</h1>
 </div>
+<p style="width: 85%; padding-left: 7.5%; font-size: larger;">
+    At <a href="{% url 'nuru:about' %}">{{name}}</a>, we are dedicated to providing our community with valuable resources to enhance your spiritual
+    journey. Here, you can find a variety of downloadable materials, including Islamic literature, educational
+    pamphlets, audio lectures, and event recordings. Whether you're looking to deepen your understanding of the faith or
+    share knowledge with others, our collection is designed to support you and your family in your religious practices.
+    We encourage you to explore the available resources and enrich your connection to our vibrant community.
+</p>
+
+<ul style="padding-left: 15%;">
+    {% for f in files %}
+
+    <li>
+        <a href="{% url 'nuru:download-file' f.id %}">{{ f.name }}</a>
+        <p>
+            {{f.about}}
+        </p>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

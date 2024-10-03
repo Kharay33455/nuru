@@ -48,7 +48,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="btn btn-block donate" aria-disabled="true">Donate</a>
+          <a class="btn btn-block donate" aria-disabled="true" href="{% url 'nuru:donate' %}">Donate</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -136,15 +136,16 @@
         </div>
 
         <div class="col-md-5 offset-md-1 mb-3">
-          <form>
+          <form method="post" action="{% url 'nuru:suscribe' %}">
+            {% csrf_token %}
             <h5>Subscribe to our newsletter</h5>
             <p class="black">
               Get updates and highlights of new and exciting resources to support your spiritual growth.
             </p>
             <div class="d-flex flex-column flex-sm-row w-100 gap-2">
               <label for="newsletter1" class="visually-hidden">Email address</label>
-              <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-              <button class="btn btn-primary" type="button">Subscribe</button>
+              <input id="newsletter1" type="text" class="form-control" placeholder="Email address" name="email">
+              <button class="btn btn-primary" type="submit">Subscribe</button>
             </div>
           </form>
         </div>

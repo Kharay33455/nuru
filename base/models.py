@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 
@@ -34,6 +36,8 @@ class Address(models.Model):
     phone = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
     days_active = models.CharField(max_length=50)
+    longitude = models.FloatField()
+    latitude = models.FloatField()    
 
 
     def __str__(self):
@@ -72,10 +76,13 @@ class Message(models.Model):
         return f'Message from {self.email} on {self.title}'
     
 class Mosque(models.Model):
-    longitude = models.FloatField()
-    latitude = models.FloatField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    mosque = models.ForeignKey(Address, on_delete=models.CASCADE, default=1)
     zoom = models.FloatField(default=10.00)
     from_zoom = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user.username} mosque object'
 
 class MosqueName(models.Model):
     name = models.CharField(max_length=100)
@@ -91,3 +98,19 @@ class Leader(models.Model):
 
     def __str__(self):
         return f'{self.position} {self.name}'
+    
+class Download(models.Model):
+    name = models.CharField(max_length=50)
+    about = models.TextField()
+    file = models.FileField(upload_to='documents')
+
+    def __str__(self):
+        return self.name
+    
+class BankAccount(models.Model):
+    account_name = models.CharField(max_length=50)
+    account_number = models.CharField(max_length=11)
+    bank_name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f'{self.bank_name} account'

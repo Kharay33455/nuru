@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 
 # Create your views here.
@@ -29,6 +29,15 @@ def gallery(request):
     return render(request, 'base/gallery.html', context)
 
 def message(request):
+    ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if ip:
+        ip = ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    try:
+        user = User.objects.get(username = ip)
+    except(User.DoesNotExist):
+        user = User.objects.create(username = ip)
     if request.method == 'POST':
         title = request.POST['title']
         message = request.POST['message']
@@ -38,7 +47,11 @@ def message(request):
         msg = 'Your message was sent successfully. Someone would get back to you as soon as possible.'
         addresses = Address.objects.all()
         services = Service.objects.all()
-        mosque = Mosque.objects.first()
+        try:
+            mosque = Mosque.objects.get(user = user)
+        except(KeyError, Mosque.DoesNotExist):
+            mosque = Mosque.objects.create(user = user)
+            mosque.save()
         mosque.from_zoom = False
         mosque.save()
 
@@ -47,31 +60,61 @@ def message(request):
     else:
         addresses = Address.objects.all()
         services = Service.objects.all()
-        mosque = Mosque.objects.first()
+        try:
+            mosque = Mosque.objects.get(user = user)
+        except(KeyError, Mosque.DoesNotExist):
+            mosque = Mosque.objects.create(user = user)
+            mosque.save()
+        
+        mosque.from_zoom = False
+        mosque.save()
     
 
         context ={'addresses':addresses, 'services':services, 'mosque': mosque}
         return render(request, 'base/message.html', context)
+
+
     
 def zoom(request, zoomie):
-    mosque = Mosque.objects.first()
+    ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if ip:
+        ip = ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    try:
+        user = User.objects.get(username = ip)
+    except(User.DoesNotExist):
+        user = User.objects.create(username = ip)
+
+    try:
+        mosque = Mosque.objects.get(user = user)
+    except(KeyError, Mosque.DoesNotExist):
+        mosque = Mosque.objects.create(user = user)
+        mosque.save()
+        
     if zoomie == "plus" and mosque.zoom<20:
         mosque.zoom = mosque.zoom + 0.5
         mosque.from_zoom = True
         mosque.save()
-        return HttpResponseRedirect(reverse('nuru:contact'))
+        addresses = Address.objects.all()
+        services = Service.objects.all()
+        context ={'addresses':addresses, 'services':services, 'mosque': mosque}
+        return render(request, 'base/message.html', context)
   
    
     if zoomie =="minus" and mosque.zoom >1:
         mosque.zoom= mosque.zoom - 0.5
         mosque.from_zoom = True
         mosque.save()
-        return HttpResponseRedirect(reverse('nuru:contact'))
+        addresses = Address.objects.all()
+        services = Service.objects.all()
+        context ={'addresses':addresses, 'services':services, 'mosque': mosque}
+        return render(request, 'base/message.html', context)
     else:
         err="MINIMUM/MAXIMUM ZOOM ACHIEVED"
         addresses = Address.objects.all()
         services = Service.objects.all()
-        mosque = Mosque.objects.first()
+        mosque = Mosque.objects.get(user = request.user)
         mosque.from_zoom = False
         mosque.save()
 
@@ -110,15 +153,69 @@ def downloads(request):
     mosque_name = MosqueName.objects.first()
     addresses = Address.objects.all()
     services = Service.objects.all()
+    files = Download.objects.all()
 
-    context = {'addresses':addresses, 'services':services,'name':mosque_name}
+    context = {'addresses':addresses, 'services':services,'name':mosque_name, 'files':files}
     return render(request, 'base/downloads.html', context)
 
-"""
+
+
+def download_file(request, document_id):
+    document = get_object_or_404(Download, id=document_id)
+    response = HttpResponse(document.file, content_type='application/octet-stream')
+    response['Content-Disposition'] = f'attachment; filename="{document.file.name}"'
+    return response
+
+
+
 def suscribe(request):
     if request.method == 'POST':
         email = request.POST['email']
+        emails = Email.objects.all()
+        for e in emails:
+
+            if email == e.email:
+                err = 'Already suscribed'
+                prayer_times = PrayerTime.objects.all()
+                events = Event.objects.order_by('start')
+                main = events.first()
+                events = events.exclude(id = main.id)
+                events = events[:3]
+                addresses = Address.objects.all()
+                services = Service.objects.all()
+                photos = Photo.objects.all().order_by('?')
+                num = len(photos)
+                context = {'err':err,'prayer_time':prayer_times, 'events':events, 'main':main, 'addresses':addresses, 'services':services, 'photos':photos, 'num':num}
+                return render(request, 'base/index.html', context)
+            
         Email.objects.create(email = email)
-        return render(request, 'base/index.html')
-"""
+        prayer_times = PrayerTime.objects.all()
+        events = Event.objects.order_by('start')
+        main = events.first()
+        events = events.exclude(id = main.id)
+        events = events[:3]
+        addresses = Address.objects.all()
+        services = Service.objects.all()
+        photos = Photo.objects.all().order_by('?')
+        num = len(photos)
+        msg = 'Suscribed'
+
+        context = {'msg':msg,'prayer_time':prayer_times, 'events':events, 'main':main, 'addresses':addresses, 'services':services, 'photos':photos, 'num':num}
+        return render(request, 'base/index.html', context)
+
+
+def prayers(request):
+    addresses = Address.objects.all()
+    services = Service.objects.all()
+    
+    context = {'addresses':addresses, 'services':services}
+    return render(request, 'base/prayers.html', context)
+
+def donate(request):
+    addresses = Address.objects.all()
+    services = Service.objects.all()
+    accs = BankAccount.objects.all()
+    
+    context = {'addresses':addresses, 'services':services, 'accs':accs}
+    return render(request, 'base/donate.html', context)
 

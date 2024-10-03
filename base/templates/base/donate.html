@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+</style>
+<h1>
+    Make a donation.
+</h1>
+<div class="row">
+    <div class="col">
+
+        <img src="{% static 'images/coin.png' %}" alt="">
+  
+    </div>
+    <div class="col">
+        <h2>
+            Support Your Mosque: Make a Donation
+
+
+        </h2>
+    <ul>
+        {% for a in accs %}
+  <li>
+    <p>
+        {{a.bank_name}} <br> {{a.account_number}} <br> {{a.account_name}}
+    </p>
+        </li>
+        {% endfor %}
+    </ul>
+    </div>
+    <p>
+        Contributing to your local mosque is a meaningful way to support your community and enhance the spiritual
+        environment. Donations help cover essential expenses such as maintenance, utilities, and community programs.
+        Whether through a one-time contribution or regular giving, your support ensures that the mosque can continue
+        to serve as a place of worship, education, and fellowship. Every contribution, big or small, makes a
+        difference. Consider making your donation today and be part of something greater!
+    </p>
+</div>
+
+{% endblock %}

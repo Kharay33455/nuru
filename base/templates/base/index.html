@@ -2,6 +2,23 @@
 {% load static %}
 
 {% block content %}
+{% if err %}
+<script>
+    alert('Already suscribed')
+</script>
+<p style="color: white; text-align: center; background-color: red;">
+    {{err}}
+</p>
+{% endif %}
+
+{% if msg %}
+<script>
+    alert('Welcome! You\'re officially on our list!!!')
+</script>
+<p style="color: white; background-color: green; text-align: center;">
+    You're officially on our list!!!
+</p>
+{% endif %}
 <div>
 
 
@@ -83,7 +100,7 @@
                 <p>
 
 
-                        <a href="" class="join">
+                        <a href="{% url 'nuru:prayers' %}" class="join">
                             Read more
                         </a>
 
