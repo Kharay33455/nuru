@@ -2,4 +2,7 @@ db.sqlite3
 *.pyc
 nenv
 nuru/settings.py
+<<<<<<< HEAD
 documents
+=======
+>>>>>>> 895b40b567de53e79fbbc9172616bbece7f11f4f
