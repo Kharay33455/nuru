@@ -219,3 +219,30 @@ def donate(request):
     context = {'addresses':addresses, 'services':services, 'accs':accs}
     return render(request, 'base/donate.html', context)
 
+def update_mosque(request):
+    ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if ip:
+        ip = ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    try:
+        user = User.objects.get(username = ip)
+    except(User.DoesNotExist):
+        user = User.objects.create(username = ip)
+    mosque_id = request.POST['mosques']
+    mosque_obj = Mosque.objects.get(user = user)
+    choice = Address.objects.get(id = mosque_id)
+    mosque_obj.mosque = choice
+    mosque_obj.from_zoom = True
+    mosque_obj.save()
+
+    addresses = Address.objects.all()
+    services = Service.objects.all()
+
+
+    
+
+    context ={'addresses':addresses, 'services':services, 'mosque': mosque_obj}
+    return render(request, 'base/message.html', context)
+
+

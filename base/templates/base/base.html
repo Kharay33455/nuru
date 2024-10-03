@@ -51,10 +51,8 @@
           <a class="btn btn-block donate" aria-disabled="true" href="{% url 'nuru:donate' %}">Donate</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      <div id="google_translate_element"></div>
+
     </div>
   </div>
 </nav>
@@ -163,5 +161,14 @@
     crossorigin="anonymous"></script>
     <script src="{% static 'scripts/base.js' %}"></script>
 </body>
+
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+  }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
 
 </html>

@@ -10,3 +10,13 @@ function hideImg(){
 }
 
 
+
+if (window.innerWidth < 991) {
+    document.getElementById('map-container').style.display = 'none';
+    document.getElementById('map-container-phone').style.display = 'flexbox'
+} else {
+        document.getElementById('map-container').style.display = 'flex';
+    document.getElementById('map-container-phone').style.display = 'none'
+}
+
+

@@ -255,6 +255,25 @@ th {
 
 }
 
+#map{
+    width: 70%;
+}
+
+.map-container-phone-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Adds space between buttons */
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+#map-container-phone{
+    display: flexbox;
+}
+
+
+
 
 
 @media screen and (max-width: 991px) {
@@ -262,6 +281,7 @@ th {
     /*FOR iPads and tablets */
     .row {
         display: block;
+        padding: 5px;
     }
 
     .col {
