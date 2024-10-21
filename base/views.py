@@ -175,6 +175,7 @@ def download_file(request, document_id):
 def suscribe(request):
     if request.method == 'POST':
         email = request.POST['email']
+        name = request.POST['name']
         emails = Email.objects.all()
         for e in emails:
 
@@ -192,7 +193,7 @@ def suscribe(request):
                 context = {'err':err,'prayer_time':prayer_times, 'events':events, 'main':main, 'addresses':addresses, 'services':services, 'photos':photos, 'num':num}
                 return render(request, 'base/index.html', context)
             
-        Email.objects.create(email = email)
+        Email.objects.create(email = email, name= name)
         prayer_times = PrayerTime.objects.all()
         events = Event.objects.order_by('start')
         main = events.first()
@@ -255,11 +256,12 @@ def send_email(subject, from_email, mail_adds):
     to_email = mail_adds
     
     # Prepare the plain text and HTML content
-    text_content = 'This is an important message.'
-    html_content = render_to_string('base/email.html', {'context_variable': 'value'})
+    
 
     # Create the email
-    for mails in mail_adds:
+    for mails, firstName in mail_adds.items():
+        text_content = 'This is an important message.'
+        html_content = render_to_string('base/email.html', {'first_name': firstName, 'subject':subject})
         email = EmailMultiAlternatives(subject, text_content, from_email, [mails])
         email.attach_alternative(html_content, "text/html")
     
@@ -278,9 +280,9 @@ def mailer(request):
             subject = request.POST['subject']
             message =  request.POST['body']
             emails = Email.objects.all()
-            mail_adds = []
+            mail_adds = {}
             for email in emails:
-                mail_adds.append(email)
+                mail_adds[email.email] = email.first_name
 
             try:
                 send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)

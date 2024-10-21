@@ -63,6 +63,8 @@ class Photo(models.Model):
     
 class Email(models.Model):
     email = models.EmailField()
+    first_name = models.CharField(max_length=50, default='Guest')
+
 
     def __str__(self):
         return self.email

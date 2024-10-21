@@ -1,15 +1,19 @@
+{% load static %}
 <!-- email_template.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Email</title>
 </head>
-<body>
-    <h1 style="background-color: red;">Hello!</h1>
-    <p>This is a message sent from Django.</p>
-    <p style="padding-top: 50px;">
-djghshi
+<body style="background-image: url({% static 'images/moon.jpg' %});">
+    <div style="background-color: rgba(225, 225, 225, 0.6); color: white;">
+    <h1 style="background-color:  #87CEEB;">Hello {{first_name}},</h1> 
+    <p>I hope this message finds you in peace and blessings! </p>
+
+    <p style="padding-top: 20px;">
+
+        {{subject}}
     </p>
-    <p>Context Variable: {{ context_variable }}</p>
+</div>
 </body>
 </html>
