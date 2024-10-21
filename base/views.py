@@ -9,6 +9,29 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 # Create your views here.
 
+def send_email(subject, from_email, mail_adds, message):
+    subject = subject
+    from_email = from_email
+    to_email = mail_adds
+    message = message
+    
+    # Prepare the plain text and HTML content
+    
+
+    # Create the email
+    for mails, firstName in mail_adds.items():
+        text_content = 'This is an important message.'
+        html_content = render_to_string('base/email.html', {'first_name': firstName, 'body':message})
+        email = EmailMultiAlternatives(subject, text_content, from_email, [mails])
+        email.attach_alternative(html_content, "text/html")
+    
+    # Send the email
+        try:
+
+            email.send()
+        except Exception as e:
+            MailError.objects.create(email = mails, error = e)
+
 
 def index(request):
     prayer_times = PrayerTime.objects.all()
@@ -193,7 +216,9 @@ def suscribe(request):
                 context = {'err':err,'prayer_time':prayer_times, 'events':events, 'main':main, 'addresses':addresses, 'services':services, 'photos':photos, 'num':num}
                 return render(request, 'base/index.html', context)
             
-        Email.objects.create(email = email, name= name)
+        new_email_obj = Email.objects.create(email = email, name= name)
+        adds = {f'{new_email_obj.email}': f'{new_email_obj.first_name}'}
+        send_email(subject='Welcome to Allahu Nuru Ala Nuru. We are thrilled to have you onboard.', from_email='hello@allahunurualanuru.com', mail_adds=adds, message="As a subscriber, you’ll be the first to know about our latest updates, exclusive offers, and insightful content tailored just for you. Our mission is to bring you the best in [briefly mention what Nosque focuses on, e.g., innovative solutions, community events, etc.], and we’re excited to share this journey with you. <br/> Feel free to explore our website, and don’t hesitate to reach out with any questions or feedback. We value your input and are here to help! <br/> <br/>Thank you for joining us. Let’s make great things happen together!")
         prayer_times = PrayerTime.objects.all()
         events = Event.objects.order_by('start')
         main = events.first()
@@ -249,29 +274,6 @@ def update_mosque(request):
 # views.py or any appropriate location in your Django app
 
 
-
-def send_email(subject, from_email, mail_adds, message):
-    subject = subject
-    from_email = from_email
-    to_email = mail_adds
-    message = message
-    
-    # Prepare the plain text and HTML content
-    
-
-    # Create the email
-    for mails, firstName in mail_adds.items():
-        text_content = 'This is an important message.'
-        html_content = render_to_string('base/email.html', {'first_name': firstName, 'body':message})
-        email = EmailMultiAlternatives(subject, text_content, from_email, [mails])
-        email.attach_alternative(html_content, "text/html")
-    
-    # Send the email
-        try:
-
-            email.send()
-        except Exception as e:
-            MailError.objects.create(email = mails, error = e)
 
 
 def mailer(request):
