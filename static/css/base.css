@@ -12,6 +12,11 @@
     color: white;
 }
 
+.mosque_logo{
+    
+    padding-left: 50px;
+}
+
 .join {
     background-color: #FF9822;
     color: white;
@@ -258,6 +263,11 @@ th {
 #map{
     width: 70%;
 }
+.cus_body{
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
 
 .map-container-phone-buttons {
     display: flex;
@@ -272,6 +282,9 @@ th {
     display: flexbox;
 }
 
+.mosque_logo img{
+    width: 40px; height: 30px;border-radius: 50%;
+}
 
 
 
@@ -337,5 +350,15 @@ th {
     }
     .events-col{
         margin: 20px;
+    }
+    .mosque_logo{
+        padding-left: 10px;
+        width: 50px;
+        height: 40px;
+    }
+    .mosque_logo img {
+        width: 50px;
+        height: 40px;
+        border-radius: 50%;
     }
 }

@@ -3,6 +3,7 @@ from .models import *
 from django.contrib.auth.models import User, Group
 
 
+
 class EmailAdmin(admin.ModelAdmin):
     readonly_fields = ('email',)
 
@@ -36,4 +37,7 @@ admin.site.register(Email, EmailAdmin)
 admin.site.register(BankAccount)
 admin.site.unregister(User)
 admin.site.unregister(Group)
+admin.site.register(Mailer)
+
+admin.site.register(MailError)
 # Register your models here.

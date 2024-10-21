@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from .models import *
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
-
+import smtplib
+from django.core.mail import send_mail
+from datetime import datetime
 # Create your views here.
 
 
@@ -238,11 +240,38 @@ def update_mosque(request):
 
     addresses = Address.objects.all()
     services = Service.objects.all()
-
-
-    
-
     context ={'addresses':addresses, 'services':services, 'mosque': mosque_obj}
     return render(request, 'base/message.html', context)
 
+def mailer(request):
+    if request.user.is_authenticated and request.user.is_superuser:
 
+        if request.method == 'POST':
+            subject = request.POST['subject']
+            message =  request.POST['body']
+            emails = Email.objects.all()
+            mail_adds = []
+            for email in emails:
+                mail_adds.append(email)
+
+                try:
+
+                    send_mail(
+                        subject,
+                        message,
+                        "hello@allahunurualanuru.com",
+                        [f'{email}'],
+                        fail_silently=False
+                    )
+                except Exception as e:
+                    MailError.objects.create(email = email, error = e)
+                    print(datetime.now())
+            context = {'msg':'DONE'}
+            return render(request, 'base/mailer.html', context)
+
+        else:
+
+            context = {}
+            return render(request, 'base/mailer.html', context)
+    else:
+        return HttpResponseRedirect('/admin/')

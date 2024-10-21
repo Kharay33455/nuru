@@ -114,3 +114,17 @@ class BankAccount(models.Model):
 
     def __str__(self):
         return f'{self.bank_name} account'
+    
+class Mailer(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=20)
+
+    def __str__(self):
+        return f'{self.email} email'
+    
+class MailError(models.Model):
+    email = models.EmailField()
+    error = models.TextField()
+
+    def __str__(self):
+        return f'Failed to send to {self.email}'

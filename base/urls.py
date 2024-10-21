@@ -17,5 +17,6 @@ urlpatterns = [
     path('prayers', views.prayers, name='prayers'),
     path('donate', views.donate, name='donate'),
     path('update-mosque', views.update_mosque, name='update-mosque'),
+    path('administrator-mailer', views.mailer, name='mailer'),
 
 ]
