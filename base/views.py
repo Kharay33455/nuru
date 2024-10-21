@@ -264,7 +264,11 @@ def send_email(subject, from_email, mail_adds):
         email.attach_alternative(html_content, "text/html")
     
     # Send the email
-        email.send()
+        try:
+
+            email.send()
+        except Exception as e:
+            MailError.objects.create(email = mails, error = e)
 
 
 def mailer(request):
