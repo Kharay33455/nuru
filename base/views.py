@@ -282,8 +282,8 @@ def mailer(request):
             for email in emails:
                 mail_adds.append(email)
 
-                try:
-                    send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
+            try:
+                send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
 
 #                    send_mail(
  #                       subject,
@@ -292,9 +292,8 @@ def mailer(request):
     #                    [f'{email}'],
      #                   fail_silently=False
       #              )
-                except Exception as e:
-                    MailError.objects.create(email = email, error = e)
-                    print(datetime.now())
+            except Exception as e:
+                MailError.objects.create(email = email, error = e)
             context = {'msg':'DONE'}
             return render(request, 'base/mailer.html', context)
 
