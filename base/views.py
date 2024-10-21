@@ -5,6 +5,8 @@ from django.urls import reverse
 import smtplib
 from django.core.mail import send_mail
 from datetime import datetime
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
 # Create your views here.
 
 
@@ -243,6 +245,27 @@ def update_mosque(request):
     context ={'addresses':addresses, 'services':services, 'mosque': mosque_obj}
     return render(request, 'base/message.html', context)
 
+# views.py or any appropriate location in your Django app
+
+
+
+def send_email(subject, from_email, mail_adds):
+    subject = subject
+    from_email = from_email
+    to_email = mail_adds
+    
+    # Prepare the plain text and HTML content
+    text_content = 'This is an important message.'
+    html_content = render_to_string('base/email.html', {'context_variable': 'value'})
+
+    # Create the email
+    email = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
+    email.attach_alternative(html_content, "text/html")
+    
+    # Send the email
+    email.send()
+
+
 def mailer(request):
     if request.user.is_authenticated and request.user.is_superuser:
 
@@ -255,14 +278,15 @@ def mailer(request):
                 mail_adds.append(email)
 
                 try:
+                    send_mail(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
 
-                    send_mail(
-                        subject,
-                        message,
-                        "hello@allahunurualanuru.com",
-                        [f'{email}'],
-                        fail_silently=False
-                    )
+#                    send_mail(
+ #                       subject,
+  #                      message,
+   #                     "hello@allahunurualanuru.com",
+    #                    [f'{email}'],
+     #                   fail_silently=False
+      #              )
                 except Exception as e:
                     MailError.objects.create(email = email, error = e)
                     print(datetime.now())
