@@ -216,7 +216,7 @@ def suscribe(request):
                 context = {'err':err,'prayer_time':prayer_times, 'events':events, 'main':main, 'addresses':addresses, 'services':services, 'photos':photos, 'num':num}
                 return render(request, 'base/index.html', context)
             
-        new_email_obj = Email.objects.create(email = email, name= name)
+        new_email_obj = Email.objects.create(email = email, first_name= name)
         adds = {f'{new_email_obj.email}': f'{new_email_obj.first_name}'}
         send_email(subject='Welcome to Allahu Nuru Ala Nuru. We are thrilled to have you onboard.', from_email='hello@allahunurualanuru.com', mail_adds=adds, message="As a subscriber, you’ll be the first to know about our latest updates, exclusive offers, and insightful content tailored just for you. Our mission is to bring you the best in [briefly mention what Nosque focuses on, e.g., innovative solutions, community events, etc.], and we’re excited to share this journey with you. <br/> Feel free to explore our website, and don’t hesitate to reach out with any questions or feedback. We value your input and are here to help! <br/> <br/>Thank you for joining us. Let’s make great things happen together!")
         prayer_times = PrayerTime.objects.all()
