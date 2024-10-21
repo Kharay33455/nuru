@@ -250,10 +250,11 @@ def update_mosque(request):
 
 
 
-def send_email(subject, from_email, mail_adds):
+def send_email(subject, from_email, mail_adds, message):
     subject = subject
     from_email = from_email
     to_email = mail_adds
+    message = message
     
     # Prepare the plain text and HTML content
     
@@ -261,7 +262,7 @@ def send_email(subject, from_email, mail_adds):
     # Create the email
     for mails, firstName in mail_adds.items():
         text_content = 'This is an important message.'
-        html_content = render_to_string('base/email.html', {'first_name': firstName, 'subject':subject})
+        html_content = render_to_string('base/email.html', {'first_name': firstName, 'body':message})
         email = EmailMultiAlternatives(subject, text_content, from_email, [mails])
         email.attach_alternative(html_content, "text/html")
     
@@ -285,7 +286,7 @@ def mailer(request):
                 mail_adds[email.email] = email.first_name
 
             try:
-                send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
+                send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds, message = message)
 
 #                    send_mail(
  #                       subject,
