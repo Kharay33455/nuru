@@ -259,11 +259,12 @@ def send_email(subject, from_email, mail_adds):
     html_content = render_to_string('base/email.html', {'context_variable': 'value'})
 
     # Create the email
-    email = EmailMultiAlternatives(subject, text_content, from_email, [to_email])
-    email.attach_alternative(html_content, "text/html")
+    for mails in mail_adds:
+        email = EmailMultiAlternatives(subject, text_content, from_email, [mails])
+        email.attach_alternative(html_content, "text/html")
     
     # Send the email
-    email.send()
+        email.send()
 
 
 def mailer(request):
