@@ -1,18 +1,21 @@
-{% load static %}
 <!-- email_template.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Email</title>
 </head>
-<body style="background-image: url({% static 'images/moon.jpg' %});">
+<body >
     <div style="background-color: rgba(225, 225, 225, 0.6); color: white;">
-    <h1 style="background-color:  #87CEEB;">Hello {{first_name}},</h1> 
-    <p>I hope this message finds you in peace and blessings! </p>
+    <h1 style="background-color:  #87CEEB; color: white;">Hello {{first_name}},</h1> 
+    <p style="color: white">I hope this message finds you in peace and blessings! </p>
 
-    <p style="padding-top: 20px;">
+    <p style="padding-top: 20px; color: white;">
 
         {{subject}}
+    </p>
+
+    <p style="color: white;">
+        Fell free to <a href="https://www.allahunurualanuru.com/contact">contact us</a> with any questions or visit our <a href="https://www.allahunurualanuru.com">website</a> for more information.
     </p>
 </div>
 </body>
