@@ -279,7 +279,7 @@ def mailer(request):
                 mail_adds.append(email)
 
                 try:
-                    send_mail(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
+                    send_email(subject=subject, from_email='hello@allahunurualanuru.com', mail_adds = mail_adds)
 
 #                    send_mail(
  #                       subject,
