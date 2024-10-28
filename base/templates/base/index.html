@@ -100,9 +100,9 @@
                 <p>
 
 
-                        <a href="{% url 'nuru:prayers' %}" class="join">
-                            Read more
-                        </a>
+                    <a href="{% url 'nuru:prayers' %}" class="join">
+                        Read more
+                    </a>
 
 
 
@@ -164,6 +164,69 @@
 
     </div>
 
+    <div class="services">
+        <h2 style="text-align: center;">
+            Our sercive hours.
+        </h2>
+        <p style="padding-left: 50px;">
+            Come and worship with us
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Start Time
+                    </th>
+                    <th>
+                        End Time
+                    </th>
+                    <th>
+                        Days Scheduled
+                    </th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+                {% for s in services %}
+                <tr>
+                    <td>
+                        {% if s.name %}
+                        {{s.name}}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if s.start %}
+                        {{s.start}}
+                        {% else %}
+                        -
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if s.end %}
+                        {{s.end}}
+                        {% else %}
+                        -
+                        {% endif %} </td>
+                    <td>
+                        {% if s.days %}
+                        {{s.days}}
+                        {% else %}
+                        -
+                        {% endif %} </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
     <!--Prayer times section-->
 
     <!--Events and upcoming community activities-->
@@ -178,27 +241,28 @@
         Whether you're looking to deepen your understanding of our faith, connect with fellow community members, or
         participate in family-friendly activities, there's something for everyone! <br>
 
-        Don't miss out on our special gatherings, educational programs, and volunteer opportunities. Visit our <a href="{% url 'nuru:events' %}">events</a> 
+        Don't miss out on our special gatherings, educational programs, and volunteer opportunities. Visit our <a
+            href="{% url 'nuru:events' %}">events</a>
         page today and be part of our vibrant community! <br>
 
         We look forward to welcoming you!
 
 
     </p> <br>
-<a href="{% url 'nuru:event' main.slugger %}" style="text-decoration: none; color: black;">
-    <h4 style="text-align: center;">
-        {{main.name}}
-    </h4> <br /> 
-    <p style="text-align: center;">
-        Venue: {{main.venue}}
-    </p>
-    <br>
-    <div class="emain">
+    <a href="{% url 'nuru:event' main.slugger %}" style="text-decoration: none; color: black;">
+        <h4 style="text-align: center;">
+            {{main.name}}
+        </h4> <br />
+        <p style="text-align: center;">
+            Venue: {{main.venue}}
+        </p>
+        <br>
+        <div class="emain">
 
-        <img style="width: 100%;" src="{{main.picture.url}}" alt="{{main.info}}">
+            <img style="width: 100%;" src="{{main.picture.url}}" alt="{{main.info}}">
 
-    </div>
-</a>
+        </div>
+    </a>
 
     <div class="erow">
 
@@ -214,10 +278,10 @@
             <a href="{% url 'nuru:event' e.slugger %}" style="text-decoration: none; color: black;">
 
 
-            <b> {{e.name}}</b> <br>
-            Venue: {{e.venue}}
-        </a>
-    </a>
+                <b> {{e.name}}</b> <br>
+                Venue: {{e.venue}}
+            </a>
+            </a>
 
 
         </div>
@@ -244,7 +308,8 @@
 
 
             <div class="pcol">
-                <img style="width: 100%; height: 100%; cursor: pointer;" onclick="showImg(this.src, this.alt)" src="{{p.picture.url}}" alt="{{p.description}}">
+                <img style="width: 100%; height: 100%; cursor: pointer;" onclick="showImg(this.src, this.alt)"
+                    src="{{p.picture.url}}" alt="{{p.description}}">
             </div>
 
             {% endfor %}
@@ -261,7 +326,8 @@
 
 
             <div class="pcol2">
-                <img style="width: 100%; height: 100%; cursor: pointer;" src="{{p.picture.url}}" onclick="showImg(this.src, this.alt)" src="{{p.picture.url}}" alt="{{p.description}}">
+                <img style="width: 100%; height: 100%; cursor: pointer;" src="{{p.picture.url}}"
+                    onclick="showImg(this.src, this.alt)" src="{{p.picture.url}}" alt="{{p.description}}">
             </div>
 
             {% endfor %}
@@ -285,7 +351,8 @@
                 </span>
                 <img src="{{first.picture.url}}" id="fullImg" alt="">
                 <p id="caption">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, odit! Eveniet et, dolores non beatae deleniti
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, odit! Eveniet et, dolores non
+                    beatae deleniti
                     fugiat quibusdam vitae debitis aperiam fugit quasi sint odit dolore ullam ipsum atque natus.
                 </p>
             </div>
